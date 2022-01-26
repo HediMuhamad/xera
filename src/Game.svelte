@@ -7,7 +7,7 @@
 	function fix(string: string) {
 		string = string.replace(/‌/g, "")
 		string = string.replace(/ـ/g, "")
-		string = string.replace(/ه/g, "ھ")
+		string = string.replace(/ھ/g, "ه")
 		string = string.replace(/ي/g, "ی")
 		string = string.replace(/ك/g, "ک")
 		string = string.replace(/ة/g, "ە")
