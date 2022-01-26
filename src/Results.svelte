@@ -12,7 +12,7 @@
 	<a href="https://github.com/roj1512/XeraNusin/stargazers" target="_blank"
 		><i class="fa fa-star" /></a
 	>
-	<a href="https://github.com/roj1512/XeraNusin/stargazers" target="_blank"
+	<a href="https://github.com/roj1512/XeraNusin/fork" target="_blank"
 		><i class="fa fa-code-fork" /></a
 	>
 </div>
