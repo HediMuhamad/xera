@@ -10,7 +10,7 @@
 			.split("\n")
 			.map(v => v)
 			.filter(v => !v.includes(" "))
-			.filter(v => v.length >= 3)
+			.filter(v => v.length >= 3 && v.length <= 10)
 	})()
 </script>
 
