@@ -40,6 +40,8 @@
 	$: accuracy = Math.round(((written - mistakes) / written) * 100)
 
 	window.onkeypress = function (e: any) {
+		if (finished) return
+
 		if (!started) {
 			setTimeout(() => (finished = true), 60 * 1000)
 			started = true
