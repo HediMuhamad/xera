@@ -21,6 +21,8 @@
 	div
 		gap 1em
 		display flex
-		flex-wrap wrap
 		font-size 2em
+		flex-wrap wrap
+		align-items center
+		justify-content center
 </style>
