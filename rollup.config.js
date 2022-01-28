@@ -70,6 +70,7 @@ export default {
 		}),
 		commonjs(),
 		typescript({
+			rootDir: "src/",
 			sourceMap: !production,
 			inlineSources: !production,
 		}),

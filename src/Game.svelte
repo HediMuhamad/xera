@@ -1,33 +1,25 @@
 <script lang="ts">
 	import Input from "./Input.svelte"
 	import Results from "./Results.svelte"
+	import { getRandomContent, areEqual } from "./utils"
 
-	export let words: string[]
+	export let contents: string[]
 
-	function fix(string: string) {
-		string = string.replace(/‌/g, "")
-		string = string.replace(/ـ/g, "")
-		string = string.replace(/ھ/g, "ه")
-		string = string.replace(/ي/g, "ی")
-		string = string.replace(/ك/g, "ک")
-		string = string.replace(/ة/g, "ە")
-		string = string.replace(/ء/g, "ئ")
-		string = string.replace(/ؤ/g, "ۆ")
-		return string
+	function newContent() {
+		let toReturn = []
+
+		for (let i = 0; i < 4; i++) {
+			const content = getRandomContent(contents)
+			contents = contents.filter(c => c != content)
+			toReturn.push(content)
+		}
+
+		return toReturn.join(" ")
 	}
 
-	function areEqual(x: string, y: string) {
-		return fix(x) == fix(y)
-	}
-
-	function getRandomWord() {
-		const toReturn = words[Math.floor(Math.random() * words.length)]
-		words = words.filter(v => v != toReturn)
-		return toReturn
-	}
-
+	let time = 1
 	let index = 0
-	let word = getRandomWord()
+	let content = newContent()
 
 	let started = false
 	let finished = false
@@ -35,24 +27,24 @@
 	let written = 0
 	let mistakes = 0
 
-	$: char = word[index]
-	$: wpm = Math.round(written / 5)
+	$: char = content[index]
+	$: wpm = Math.floor(Math.round(written / 5) / time)
 	$: accuracy = Math.round(((written - mistakes) / written) * 100)
 
 	window.onkeypress = function (e: any) {
 		if (finished) return
-
-		if (!started) {
-			setTimeout(() => (finished = true), 60 * 1000)
-			started = true
-		}
-
 		const input = String.fromCharCode(e.charCode)
-
+		if (!started && Number(input) > 0 && Number(input) <= 10) {
+			time = Number(input)
+		}
 		if (areEqual(input, char)) {
-			if (word.length == index + 1) {
+			if (!started) {
+				setTimeout(() => (finished = true), 60 * time * 1000)
+				started = true
+			}
+			if (content.length == index + 1) {
 				index = 0
-				word = getRandomWord()
+				content = newContent()
 			} else {
 				index++
 				written++
@@ -64,7 +56,7 @@
 </script>
 
 {#if finished}
-	<Results {wpm} {accuracy} />
+	<Results {wpm} {accuracy} {mistakes} />
 {:else}
-	<Input {index} {char} {word} />
+	<Input {index} {char} {content} />
 {/if}

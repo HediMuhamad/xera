@@ -1,45 +1,63 @@
 <script lang="ts">
 	import Game from "./Game.svelte"
-
-	const wordlistUrl =
-		"https://raw.githubusercontent.com/layik/kurdi/master/corpus/kurdi_words.txt"
-
-	const fetchWords = (async () => {
-		const result = await fetch(wordlistUrl)
-		return (await result.text())
-			.split("\n")
-			.map(v => v)
-			.filter(v => !v.includes(" "))
-			.filter(v => v.length >= 3 && v.length <= 10)
-	})()
+	import ModeToggler from "./ModeToggler.svelte"
+	import { contents } from "./contents"
 </script>
 
+<header>
+	<ModeToggler />
+</header>
+
 <main>
-	{#await fetchWords}
-		<h1>تکایە چاوەڕوان بە...</h1>
-	{:then words}
-		<Game {words} />
-	{:catch err}
-		<p>{err}</p>
-	{/await}
+	<Game {contents} />
 </main>
+
+<footer>
+	<p>
+		&copy; {new Date().getFullYear()} <a href="https://roj.im">ڕۆژ</a> &middot;
+		<a href="https://github.com/roj1512/xera">سەرچاوە</a>
+	</p>
+</footer>
 
 <style lang="stylus" global>
 	@import 'styles/variables'
 
 	*
-		user-select none
+		margin 0
+		padding 0
+		box-sizing border-box
+		transition-duration 250ms
+		transition-timing-function linear
 
-	body
-		color dark
-		height 100vh
-		display flex
-		font-family Vazir
-		align-items center
-		flex-direction column
-		background-color light
-		justify-content center
-	
+	html
+		&, body
+			height 100%
+
+		body
+			color dark
+			display flex
+			padding 2rem
+			font-size 1rem
+			font-family Vazir
+			flex-direction column
+			background-color light
+			justify-content space-between
+
 	main
+		max-width 500px
+		align-self center
+	
+	footer
+		user-select none
 		text-align center
+
+		a
+			text-decoration none
+			border-bottom 1px solid
+
+			&, &:visited
+				color inherit
+
+			&:hover
+				background-color light-alt
 </style>
