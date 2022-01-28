@@ -9,30 +9,26 @@
 	const telegram = twitter + "\n" + location.href
 </script>
 
-<div>
-	<h1>خێرایی: {wpm} وشە/خولەک</h1>
+<h2>خێرایی: {wpm} وشە/خولەک</h2>
+<h2>وردی: {accuracy}%</h2>
+<h2>هەڵەکان: {mistakes}</h2>
 
-	<h1>وردی: {accuracy}%</h1>
-
-	<h1>هەڵەکان: {mistakes}</h1>
-
-	<ul>
-		<li>
-			<h1>
-				<a href="https://twitter.com/share?text={twitter}"
-					><i class="fab fa-twitter" /></a
-				>
-			</h1>
-		</li>
-		<li>
-			<h1>
-				<a href="https://t.me/share?url={telegram}"
-					><i class="fab fa-telegram-plane" /></a
-				>
-			</h1>
-		</li>
-	</ul>
-</div>
+<ul>
+	<li>
+		<h1>
+			<a href="https://twitter.com/share?text={twitter}"
+				><i class="fab fa-twitter" /></a
+			>
+		</h1>
+	</li>
+	<li>
+		<h1>
+			<a href="https://t.me/share?url={telegram}"
+				><i class="fab fa-telegram-plane" /></a
+			>
+		</h1>
+	</li>
+</ul>
 
 <style lang="stylus">
 	@import 'styles/variables'
@@ -41,14 +37,13 @@
 		margin 0
 		padding 0
 
-	div
-		gap 25px
-		display flex
-		flex-direction column
+	h2
+		margin-bottom 1rem
 
 	ul
 		display flex
 		list-style none
+		margin-top 1rem
 		align-items center
 		justify-content space-evenly
 

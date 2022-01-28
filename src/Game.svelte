@@ -45,7 +45,7 @@
 	}
 </script>
 
-{#if finished}
+{#if true}
 	<Results {wpm} {accuracy} {mistakes} />
 {:else}
 	<Input {currCharIndex} {currLineIndex} {contents} />

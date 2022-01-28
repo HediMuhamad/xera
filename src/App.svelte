@@ -39,14 +39,14 @@
 			display flex
 			padding 2rem
 			font-size 1rem
-			font-family Vazir
+			font-family Estedad
 			flex-direction column
 			background-color light
 			justify-content space-between
 
 	main
 		align-self center
-	
+
 	footer
 		user-select none
 		text-align center

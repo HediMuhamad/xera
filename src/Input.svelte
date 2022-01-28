@@ -13,28 +13,28 @@
 
 <label>
 	{#if prevLine}
-		<h1><span class="complete">{prevLine}</span></h1>
+		<h2><span class="complete">{prevLine}</span></h2>
 	{/if}
 	<input type="text" name="" on:keydown={console.log} />
-	<h1>
+	<h2>
 		<span class="complete">{currLine.slice(0, currCharIndex)}</span><span
 			class="index">{currChar}</span
 		>{currLine.slice(currCharIndex + 1, currLine.length)}
-	</h1>
+	</h2>
 	{#if nextLine}
-		<h1>
+		<h2>
 			{nextLine}
-		</h1>
+		</h2>
 	{/if}
 	{#if !prevLine}
-		<h1>{afterNextLine}</h1>
+		<h2>{afterNextLine}</h2>
 	{/if}
 </label>
 
 <style lang="stylus">
 	@import 'styles/variables'
 
-	h1
+	h2
 		text-align center
 		line-height: 1.5
 
