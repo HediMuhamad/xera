@@ -1,0 +1,10 @@
+:root {
+	--dark: #222;
+	--dark-alt: #333;
+	--light: #eee;
+	--light-alt: #ccc;
+}
+
+*::selection {
+	background-color: var(--light-alt);
+}
