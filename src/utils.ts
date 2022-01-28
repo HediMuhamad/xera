@@ -13,8 +13,3 @@ function fix(string: string) {
 export function areEqual(x: string, y: string) {
 	return fix(x) == fix(y)
 }
-
-export function getRandomContent(contents: string[]) {
-	const toReturn = contents[Math.floor(Math.random() * contents.length)]
-	return toReturn
-}

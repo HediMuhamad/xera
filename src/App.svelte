@@ -2,6 +2,7 @@
 	import Game from "./Game.svelte"
 	import ModeToggler from "./ModeToggler.svelte"
 	import { contents } from "./contents"
+	import Input from "./Input.svelte"
 </script>
 
 <header>
@@ -44,7 +45,6 @@
 			justify-content space-between
 
 	main
-		max-width 500px
 		align-self center
 	
 	footer

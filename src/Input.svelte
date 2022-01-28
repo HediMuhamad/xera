@@ -1,16 +1,34 @@
 <script lang="ts">
-	export let char: string
-	export let index: number
-	export let content: string
+	export let contents: string[]
+	export let currLineIndex: number
+	export let currCharIndex: number
+
+	$: prevLine = contents[currLineIndex - 1]
+	$: currLine = contents[currLineIndex]
+	$: nextLine = contents[currLineIndex + 1]
+	$: afterNextLine = contents[currLineIndex + 2]
+
+	$: currChar = contents[currLineIndex][currCharIndex]
 </script>
 
 <label>
-	<h1>
-		<span class="complete">{content.slice(0, index)}</span><span class="index"
-			>{char}</span
-		>{content.slice(index + 1, content.length)}
-	</h1>
+	{#if prevLine}
+		<h1><span class="complete">{prevLine}</span></h1>
+	{/if}
 	<input type="text" name="" on:keydown={console.log} />
+	<h1>
+		<span class="complete">{currLine.slice(0, currCharIndex)}</span><span
+			class="index">{currChar}</span
+		>{currLine.slice(currCharIndex + 1, currLine.length)}
+	</h1>
+	{#if nextLine}
+		<h1>
+			{nextLine}
+		</h1>
+	{/if}
+	{#if !prevLine}
+		<h1>{afterNextLine}</h1>
+	{/if}
 </label>
 
 <style lang="stylus">

@@ -1,25 +1,16 @@
 <script lang="ts">
+	import _ from "lodash"
 	import Input from "./Input.svelte"
 	import Results from "./Results.svelte"
-	import { getRandomContent, areEqual } from "./utils"
+	import { areEqual } from "./utils"
 
 	export let contents: string[]
 
-	function newContent() {
-		let toReturn = []
-
-		for (let i = 0; i < 4; i++) {
-			const content = getRandomContent(contents)
-			contents = contents.filter(c => c != content)
-			toReturn.push(content)
-		}
-
-		return toReturn.join(" ")
-	}
+	contents = _.shuffle(contents)
 
 	let time = 1
-	let index = 0
-	let content = newContent()
+	let currLineIndex = 0
+	let currCharIndex = 0
 
 	let started = false
 	let finished = false
@@ -27,7 +18,8 @@
 	let written = 0
 	let mistakes = 0
 
-	$: char = content[index]
+	$: currLine = contents[currLineIndex]
+	$: currChar = currLine[currCharIndex]
 	$: wpm = Math.floor(Math.round(written / 5) / time)
 	$: accuracy = Math.round(((written - mistakes) / written) * 100)
 
@@ -37,18 +29,16 @@
 		if (!started && Number(input) > 0 && Number(input) <= 10) {
 			time = Number(input)
 		}
-		if (areEqual(input, char)) {
+		if (areEqual(input, currChar)) {
 			if (!started) {
 				setTimeout(() => (finished = true), 60 * time * 1000)
 				started = true
 			}
-			if (content.length == index + 1) {
-				index = 0
-				content = newContent()
-			} else {
-				index++
-				written++
-			}
+			if (currLine[currCharIndex + 1] == undefined) {
+				currLineIndex++
+				currCharIndex = 0
+			} else currCharIndex++
+			written++
 		} else {
 			mistakes++
 		}
@@ -58,5 +48,5 @@
 {#if finished}
 	<Results {wpm} {accuracy} {mistakes} />
 {:else}
-	<Input {index} {char} {content} />
+	<Input {currCharIndex} {currLineIndex} {contents} />
 {/if}
