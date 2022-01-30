@@ -35,8 +35,8 @@
 	@import 'styles/variables'
 
 	h2
-		text-align center
 		line-height: 1.5
+		text-align center
 
 	input
 		width 1px
@@ -47,7 +47,7 @@
 		position absolute
 
 	.complete
-		background-color light-alt
+		color light-alt
 
 	.index
 		background-color light-alt
